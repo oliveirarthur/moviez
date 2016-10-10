@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ movie.title_long }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col>
+      <img src="{{ movie.large_cover_image}}"/>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <p>{{ movie.description_full }}</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left 
+       *ngFor="let torrent of movie.torrents"
+       (click)="download(torrent.url);">
+        <ion-icon name="ion-android-download"></ion-icon>
+        {{ torrent.quality }}
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

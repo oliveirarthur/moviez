@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-searchbar [(ngModel)]="query" (ionInput)="reset(); search();"></ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p *ngIf="!this.movies">Nothing to show :(</p>
+
+  <ion-card *ngFor="let movie of this.movies">
+    <ion-card-content>
+      <ion-card-title (click)="openDetalis(movie)">
+        {{movie.title}}
+      </ion-card-title> 
+      <ion-row (click)="openDetalis(movie)">
+        <ion-col>
+          <img src="{{ movie.large_cover_image}}"/>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-select [(ngModel)]="movie.torrent">
+              <ion-option *ngFor="let torrent of movie.torrents" [value]="torrent.url">{{ torrent.quality }} ({{ torrent.size }})</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+           <!--class="button button-balanced"-->
+          <button ion-button icon-left (click)="download(movie);">
+            <ion-icon name="ion-android-download"></ion-icon>
+            Download
+          </button>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
