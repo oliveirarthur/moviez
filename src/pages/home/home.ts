@@ -17,7 +17,6 @@ export class HomePage {
   private limit = 10;
 
   private movies:Array<any>;
-  private moviesFirstLoad:Array<any>;
 
   constructor(
     public navCtrl: NavController,
